@@ -1,10 +1,17 @@
+<!-- Template basico del modulo administrador 
+	Fecha actualizado: 02/09/2014
+	Cambio realizado: Personalización pantalla inicio
+-->
 {% extends "admin/base.html" %}
 {% load i18n %}
 
 {% block title %}{{ title }} | {% trans 'Django site admin' %}{% endblock %}
 
 {% block branding %}
-<h1 id="site-name">{% trans 'Administrador TEGESPRO' %}</h1>
+<h1 id="site-name" align="center">{% trans 'Administrador Sistema de Gestión de la Producción' %}</h1>
 {% endblock %}
 
+{% block tit %}
+<h1 id="site-name1" align="left">{% trans 'Administrador Sistema de Gestión de la Producción' %}</h1>
+{% endblock %}
 {% block nav-global %}{% endblock %}
