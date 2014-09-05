@@ -30,12 +30,14 @@ class Empresa(models.Model):
 # Objeto de la entidad web_usuarios
 # Fecha creacion: 26/08/2014
 # Fecha cambio: 26/08/2014. Cambio realizado: Cambio nombre clase Usuario => Usuarios. Ln 18
-# Fecha cambio: 26/08/2014. Cambio realizado: Colocar campo validador para email, Ln 25 
+# Fecha cambio: 26/08/2014. Cambio realizado: Colocar campo validador para email, Ln 25
+# Fecha actualizado: 05/09/2014
+# Cambio realizado: Colocar campo Password con * (favor revisar porque no lo hace), Ln 40 (DESAC). Se instancio en el fuente forms.py la clase ClaveForm() y se redefinio la visualizacion del campo denominado Clave, pero no lo renderiza.
 
 class Usuario(models.Model):
     TipoDocumento = models.ForeignKey(TipoDocumento)
     Documento = models.CharField(max_length=13, primary_key = True)
-    Clave = models.CharField(max_length=100)
+    Clave = models.CharField(max_length=100)        
     #Email = models.CharField(max_length=70, null=True)
     Email = models.EmailField(unique=True)
     Nombres = models.CharField(max_length=100)
@@ -203,3 +205,5 @@ class Detalle_Compra_Material(models.Model):
 	# Visualizacion en la grilla
 	def __unicode__(self):
 		return unicode(self.Cantidad) + unicode(self.Ref_Producto) + ' ' + self.Talla + ' ' + self.Color + ' ' + self.Observacion
+
+		
