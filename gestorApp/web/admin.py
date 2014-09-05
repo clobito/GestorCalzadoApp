@@ -1,7 +1,7 @@
 # Importacion de los modelos de la capa de ingreso a la aplicacion: Empresa, Usuarios; capa de facturacion: Conversion_UndVenta_UndCompra; capa de inventarios: Bodegas 
 # Fecha creado: 26/08/2014
 # Fecha actualizado: 27/08/2014
-# Cambio realizado: Inclusion de los modulos Productos (Falta habilitar el control de cargue de imagen), Compra de Materiales, Detalle de compra de materiales correspondiente a la capa de inventarios, Ln 9
+# Cambio realizado: Inclusion de los modulos Productos, Compra de Materiales, Detalle de compra de materiales correspondiente a la capa de inventarios, Ln 9
 from django.contrib import admin
 
 from web.models import Empresa, Usuario
@@ -11,46 +11,62 @@ from web.models import TipoDocumento, FormaPago, Empleado, Cliente, Proveedor, V
 
 # Adicion del administrador Empresa
 # Fecha creado: 26/08/2014
+# Fecha actualizado: 05/09/2014
+# Cambio realizado: Incluir filtro de busqueda actualizado, para el listado de empresas, Ln 19
 class EmpresaAdmin(admin.ModelAdmin):
     list_display = ('Empresa', 'Nit', 'Direccion')
     list_filter = ['Nit']
-    search_fields = ['Empresa', 'Nit']
+    search_fields = ['Empresa', 'Nit', 'Direccion']
 #fields = ['Empresa', 'Nit', 'Direccion']
 
 # Adicion del administrador Usuario
 # Fecha creado: 26/08/2014
 # Cambio realizado: Cambio nombre UsuarioAdmin => UsuariosAdmin, Ln 18
+# Fecha actualizado: 05/09/2014
+# Cambio realizado: Incluir filtro de busqueda, para el listado de usuarios, Ln 27-29
 class UsuariosAdmin(admin.ModelAdmin):
     list_display = ('Nombres', 'Apellidos', 'Email')
-
+	# Definicion de filtros
+    list_filter = ['Nombres', 'Apellidos']
+    search_fields = ['Nombres', 'Apellidos', 'Email']
 # Adicion del administrador Bodegas
 # Fecha creado: 26/08/2014
+# Fecha actualizado: 05/09/2014
+# Cambio realizado: Incluir filtro de busqueda, para el listado de bodegas, Ln 32-34
 class BodegasAdmin(admin.ModelAdmin):
 	list_display = ('Bodega','Estante','Observaciones')
-
+	# Definicion de filtros
+	list_filter = ['Bodega']
+	search_fields = ['Bodega','Estante','Observaciones']
 # Adicion del administrador de Conversiones entre Unidad de compra y Unidad de Venta.
 # Filtro por Unidades de venta
 # Fecha creado: 26/08/2014	
+# Fecha actualizado: 05/09/2014
+# Cambio realizado: Actualizacion de filtros, para todos los campos de la grilla, Ln 40
 class ConversionesAdmin(admin.ModelAdmin):
 	list_display = ('Unidad_Venta', 'Unidad_Compra', 'Equivalencia')
 	# Definicion de filtros
 	list_filter = ['Unidad_Venta']
-	search_fields = ['Unidad_Venta']
+	search_fields = ['Unidad_Venta', 'Unidad_Compra', 'Equivalencia']
 
 # Adicion del administrador de productos
 # Fecha creado: 26/08/2014
+# Fecha actualizado: 05/09/2014
+# Cambio realizado: Actualizacion de filtros, para todos los campos de la grilla, Ln 48
 class ProductosAdmin(admin.ModelAdmin):
 	list_display = ('Nombre_producto', 'Linea', 'Observaciones')
 	# Definicion de filtros
 	list_filter = ['Nombre_producto']
-	search_fields = ['Nombre_producto']
+	search_fields = ['Nombre_producto', 'Linea', 'Observaciones']
 # Adicion del administrador Compra de Materiales
 # Fecha creado: 27/08/2014
+# Fecha actualizado: 05/09/2014
+# Cambio realizado: Actualizacion de filtros, para todos los campos de la grilla, Ln 55
 class Compra_MaterialesAdmin(admin.ModelAdmin):
 	list_display = ('No_compra', 'Fecha', 'Observaciones')
 	# Definicion de filtros
 	list_filter = ['No_compra']
-	search_fields = ['No_compra', 'Observaciones']
+	search_fields = ['No_compra', 'Observaciones', 'Fecha']
 # Adicion del Administrador para procesar el detalle en la compra de materiales
 # Fecha creado: 27/08/2014
 # Fecha actualizado: 05/09/2014
