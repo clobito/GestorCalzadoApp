@@ -162,6 +162,8 @@ class DetalleVenta(models.Model):
 # Objeto de la entidad Compra_Materiales
 # Capa/Modulo asociado: Inventarios
 # Fecha creado: 27/08/2014
+# Fecha actualizado: 05/09/2014
+# Cambio realizado: Correcion campo No_Compra por No_compra, Ln 179. Correcion valores de retorno con la funcion unicode(). FUENTE: http://stackoverflow.com/questions/16169035/coercing-to-unicode-need-string-or-buffer-nonetype-found-when-rendering-in-dja
 class Compra_Material(models.Model):
 	# Definicion de Atributos
     No_compra = models.CharField(max_length=15, primary_key = True)
@@ -174,11 +176,17 @@ class Compra_Material(models.Model):
     def __unicode__(self):
 	    #Desactivado, , ya que aun no se han implementado sus clases
 		#return self.No_Compra + ' '+ self.Fecha + ' ' + self.Nit_proveedor + ' ' + self.Observaciones
-		return self.No_Compra + ' '+ self.Fecha + ' ' + self.Observaciones
+		return unicode(self.No_compra) or u'' + ' ' + unicode(self.Fecha) or u'' + ' ' + unicode(self.Observaciones) or u''
 
 # Objeto de la entidad Detalle_Compra_Materiales
 # Capa/Modulo asociado: Inventarios
 # Fecha creado: 27/08/2014
+# Fecha actualizado: 05/09/2014
+# Cambio realizado: Colocar objeto self en todos las variables para referenciar la informacion dentro de la grilla, Ln 199. 
+# Fecha actualizado: 05/09/2014
+# Cambio realizado: Especificar llaves foraneas complementarias en el proceso de compra, Ln 199,200.
+# Fecha actualizado: 05/09/2014
+# Cambio realizado: Colocar columna producto, Ln 205
 class Detalle_Compra_Material(models.Model):
 	# Definicion de Atributos
 	id_Detalle = models.AutoField(primary_key = True)
@@ -188,8 +196,10 @@ class Detalle_Compra_Material(models.Model):
 	Color = models.CharField(max_length=30)
 	# Campo opcional
 	Observacion = models.TextField(null = True, blank=True)
-	# Llave Foranea
+	# Llaves Foraneas
 	No_compra = models.ForeignKey(Compra_Material)
+	No_Posicion = models.ForeignKey(Bodega)
+	Ref_Producto = models.ForeignKey(Producto)
 	# Visualizacion en la grilla
 	def __unicode__(self):
-		return Cantidad + ' ' + Talla + ' ' + Color + ' ' + Observacion
+		return unicode(self.Cantidad) + unicode(self.Ref_Producto) + ' ' + self.Talla + ' ' + self.Color + ' ' + self.Observacion
