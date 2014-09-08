@@ -205,5 +205,17 @@ class Detalle_Compra_Material(models.Model):
 	# Visualizacion en la grilla
 	def __unicode__(self):
 		return unicode(self.Cantidad) + unicode(self.Ref_Producto) + ' ' + self.Talla + ' ' + self.Color + ' ' + self.Observacion
-
-		
+# Objeto de la entidad Gestion_Inventario
+# Proposito: Generar el listado de inventario con todos los movimientos relacionados
+# Fecha creado: 08/09/2014
+class Inventario(models.Model):
+	id_Inventario = models.BigIntegerField(primary_key = True)	
+	Cantidad = models.IntegerField()
+	Operacion = models.CharField(max_length=3)
+	Fecha_Hora= models.DateTimeField()
+	# Llaves Foraneas
+	No_Posicion = models.ForeignKey(Bodega)
+	Ref_Producto = models.ForeignKey(Producto)
+	# Visualizacion en la grilla
+	def __unicode__(self):
+		return unicode(self.Ref_Producto) + ' '+ unicode(self.Cantidad) + ' ' + unicode(self.Fecha_Hora) + ' ' + unicode(self.Operacion)

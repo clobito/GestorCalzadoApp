@@ -1,0 +1,39 @@
+<!-- Vista para inventario 
+Fecha creado: 03/09/2014
+Propósito: Generar esquema de funcionamiento para el inventario básico -->
+<html>
+	<head>
+		<title>Listado de Inventario</title>
+		<meta charset='utf-8'>
+	</head>	
+	<body>
+		<h1>Grilla para listado de inventario</h1>
+		<table border=1 size=100%>		
+			<!-- Titulos -->
+			<tr>
+				<td>Material</td>
+				<td>Cantidad</td>
+				<td>Bodega</td>
+				<td>Fecha/Hora</td>
+				<td>Operaci&oacute;n</td>
+			</tr>
+			<!-- Codigo para renderizacion del inventario de la BD-->
+			{% if inventario_lst %}
+			{% for elemento in inventario_lst%}
+			<tr>
+				<!-- Elemento del inventario -->
+				<td><strong>{{elemento.Ref_Producto}} </strong></td>
+				<td>{{elemento.Cantidad}}</td>
+				<td>{{elemento.No_Posicion}}</td>
+				<td>{{elemento.Fecha_Hora}}</td>
+				<td>{{elemento.Operacion}}</td>
+			</tr>
+			{% endfor %}
+			{% else %}
+			<table>
+				<tr><td>No hay elementos en inventario!</td></tr>
+			</table>
+			{% endif %}
+		</table>
+	</body>	
+</html>

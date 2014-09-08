@@ -1,0 +1,12 @@
+<!-- Plantilla para crear compra, basado en el objeto compra
+Fecha creado: 05/09/2014
+-->
+
+<html>
+	<form action="compra" method="post">{% csrf_token %}
+		<ul>
+			{{ form.as_ul}}
+		</ul>
+		<input type="submit" name="submit" value="Crear compra">
+	</form>	
+</html>
