@@ -191,7 +191,7 @@ class Compra_Material(models.Model):
 # Cambio realizado: Colocar columna producto, Ln 205
 class Detalle_Compra_Material(models.Model):
 	# Definicion de Atributos
-	id_Detalle = models.AutoField(primary_key = True)
+	id_Detalle = models.AutoField(primary_key=True)
 	Cantidad = models.IntegerField()
 	Precio_Und_Compra = models.DecimalField(max_digits=10, decimal_places=2)
 	Talla = models.CharField(max_length=4)
@@ -208,8 +208,11 @@ class Detalle_Compra_Material(models.Model):
 # Objeto de la entidad Gestion_Inventario
 # Proposito: Generar el listado de inventario con todos los movimientos relacionados
 # Fecha creado: 08/09/2014
+# Fecha actualizado: 12/09/2014
+# Cambio realizado: Actualizacion del modelo, para la llave primaria como autoincremental, Ln 215
 class Inventario(models.Model):
-	id_Inventario = models.BigIntegerField(primary_key = True)	
+	#id_Inventario = models.BigIntegerField(primary_key = True)	
+	id_Inventario = models.AutoField(primary_key=True)
 	Cantidad = models.IntegerField()
 	Operacion = models.CharField(max_length=3)
 	Fecha_Hora= models.DateTimeField()

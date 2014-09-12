@@ -1,13 +1,14 @@
 <!-- Vista para inventario 
 Fecha creado: 03/09/2014
-Propósito: Generar esquema de funcionamiento para el inventario básico -->
-<html>
-	<head>
-		<title>Listado de Inventario</title>
-		<meta charset='utf-8'>
-	</head>	
-	<body>
-		<h1>Grilla para listado de inventario</h1>
+Fecha actualizado: 12/09/2014
+Propósito: Generar esquema de funcionamiento para el inventario básico
+Cambio realizado: Presentacion sobre un template "hijo" sobre su "padre", Ln 6-10; 39  -->
+{% extends "web/base.html" %}
+{% block title %}
+	Listado de Inventario
+{% endblock %}
+{% block content %}
+	<h1><br>Grilla para listado de inventario</h1>
 		<table border=1 size=100%>		
 			<!-- Titulos -->
 			<tr>
@@ -35,5 +36,4 @@ Propósito: Generar esquema de funcionamiento para el inventario básico -->
 			</table>
 			{% endif %}
 		</table>
-	</body>	
-</html>
+{% endblock %}

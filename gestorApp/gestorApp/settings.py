@@ -60,6 +60,10 @@ ROOT_URLCONF = 'gestorApp.urls'
 
 WSGI_APPLICATION = 'gestorApp.wsgi.application'
 
+# Fecha creado: 12/09/2014
+# Proposito: Especificar el dierctorio static en el sistema
+
+STATICFILES_DIRS=(os.path.join(BASE_DIR,'static'),)
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
@@ -73,7 +77,7 @@ DATABASES = {
         'HOST': 'localhost',
         'PORT': 5432,
         'USER': 'sena',
-        #'PASSWORD': 'admin'
+        'PASSWORD': 'admin'
 		#'PASSWORD': 'granados'
 }
 }
@@ -84,22 +88,31 @@ DATABASES = {
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 # Fecha actualizado: 03/09/2014
 # Cambio realizado: Cambiar lenguaje de la interfaz
+# Fecha actualizado: 12/09/2014
+# Cambio realizado: Interpretacion idioma y zona horaria, Ln 91,94. Desactivacion USE_TZ en False, Ln 101
 
-LANGUAGE_CODE = 'es-es'
+# LANGUAGE_CODE = 'es-es'
+LANGUAGE_CODE = 'es-co'
 
-TIME_ZONE = 'UTC'
+# TIME_ZONE = 'UTC'
+TIME_ZONE =	'America/Panama'
 
 USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
-
+# USE_TZ = True
+USE_TZ = False
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# fecha creado: 12/09/2014
+# Proposito: Especificar el directorio root de archivos estaticos, Ln 115
+
+STATIC_ROOT = 'staticfiles'
 
 # Fecha actualizado: 03/09/2014
 # Cambio realizado: Enrutar templates del modulo administrador al directorio templates
