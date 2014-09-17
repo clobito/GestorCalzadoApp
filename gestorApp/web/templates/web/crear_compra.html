@@ -1,12 +1,19 @@
-<!-- Plantilla para crear compra, basado en el objeto compra
+<!-- Plantilla template para crear la orden de compra en su cabezote, basado en el objeto compra
 Fecha creado: 05/09/2014
+Fecha actualizado: 17/09/2014
+Cambio realizado: Presentación del formulario como tabla, Ln 9-11
 -->
-
-<html>
+{% extends "web/base.html" %}
+{% block title %}
+	Crear la compra
+{% endblock %}
+{% block content %}	
 	<form action="compra" method="post">{% csrf_token %}
-		<ul>
-			{{ form.as_ul}}
-		</ul>
+		<br><br><br>
+		<table>
+			{{ form.as_table}}
+		</table>
 		<input type="submit" name="submit" value="Crear compra">
+		<input type="button" name="test_btn" id="test_btn" value="confirmar"/>
 	</form>	
-</html>
+{% endblock %}
