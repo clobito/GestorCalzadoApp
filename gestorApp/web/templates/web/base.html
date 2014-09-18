@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <!-- Fecha actualizado: 12/09/2014 
-Proposito: Template base-->
+Proposito: Template base.
+Fecha actualizado: 17/09/2014
+Cambio realizado: Incluir libreria js y estilo css para manejo de Datepicker, Ln 21-22; 71
+Fecha actualizado: 18/09/2014
+Cambio realizado: Integración del Front End (Menús, fuentes, logos), Ln 20,22,26; 40-227
+-->
 <html lang="es">
   <head>
     <meta charset="utf-8">
@@ -12,11 +17,15 @@ Proposito: Template base-->
     <title>{% block title %}Software Gesti&oacuten de la Producci&oacuten {% endblock %}</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="{{STATIC_URL}}css/bootstrap.min.css" rel="stylesheet">
+   <link href="{{STATIC_URL}}css/bootstrap.min2.css" rel="stylesheet">
     <!-- Bootstrap theme -->
-    <link href="{{STATIC_URL}}css/bootstrap-theme.min.css" rel="stylesheet">	
-    <!-- Custom styles for this template -->
-<!--    <link href="css/theme.css" rel="stylesheet">-->
+   <link href="{{STATIC_URL}}css/bootstrap-theme2.min.css" rel="stylesheet">
+	<!-- CSS de Datepicker -->
+	<link href="{{STATIC_URL}}css/jquery-ui.css" rel="stylesheet">
+	<!-- CSS de fonts -->
+	<link href="{{STATIC_URL}}fonts/style.css" rel="stylesheet">	
+ 	<!-- Custom styles for this template -->
+	<!-- <link href="css/theme.css" rel="stylesheet">-->
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="{{STATIC_URL}}js/ie10-viewport-bug-workaround.js"></script>
@@ -29,33 +38,239 @@ Proposito: Template base-->
   </head>
 
   <body>	
-    <!-- Fixed navbar -->
+  
+     <!-- Fixed navbar -->
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">
+      
         <div class="navbar-header">
+        
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
             <span class="sr-only">Menu</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
-          </button>          
-		  <a class="navbar-brand">Gesti&oacute;n de la Producci&oacute;n</a>
+          </button>
+          
+
+          <a class="navbar-brand"><div class="nav-helper"><span class="logo-image"></span>Centro de Manufactura Textil y Cuero<br><p>Gesti&oacute;n de la producci&oacute;n</p></div></a>
         </div>
-        <div class="navbar-collapse collapse">
+        <div class="navbar-collapse collapse" id="menu">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#about">acerca de</a></li>
-            
+          
+<!--plantila base del menu con submenus          
+
+<li class="dropdown">
+            <a role="menu" data-toggle="dropdown" class="dropdown-toggle" data-target="#" href="">Administrador<span class="caret"></span>
+            </a>
+    		<ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
+              <li class="dropdown-submenu">
+                <a tabindex="-1" href="#">Usuarios</a>
+                <ul class="dropdown-menu">
+                  <li><a tabindex="-1" href="#">Second level</a></li>
+                  <li class="dropdown-submenu">
+                    <a href="#">Even More..</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">3rd level</a></li>
+                    	<li><a href="#">3rd level</a></li>
+                    </ul>
+                  </li>
+                  <li><a href="#">Second level</a></li>
+                  <li><a href="#">Second level</a></li>
+                </ul>
+              </li>
+            </ul>
+        </li>
+        
+        -->
+<!--BASE DISEÑO NUEVO-->     
+           <li><a href="#" onClick="activar('admin_principal')">Administrador</a></li>
+            <li class="dropdown"><a role="menu" data-toggle="dropdown" class="dropdown-toggle" data-target="#" href="">Gesti&oacute;n de Inventarios</a>
+            	<ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
+                    <li><a href="#" onClick="activar('gestionInv_principal')">Inventario</a></li>
+                    <li><a href="#">Consumo de Materiales</a></li>
+				</ul>
+            </li>
+            <li class="dropdown"><a role="menu" data-toggle="dropdown" class="dropdown-toggle" data-target="#" href="">Gesti&oacute;n de Facturaci&oacute;n</a>
+            <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
+                    <li><a href="#" onClick="activar('gestionFact_principal')">Facturaci&oacute;n</a></li>
+                    <li><a href="#" onClick="activar('gestionCostos_principal')">Costos y precios de venta</a></li>
+				</ul>
+            </li>
+             <li class="dropdown"><a role="menu" data-toggle="dropdown" class="dropdown-toggle" data-target="#" href="">Producci&oacute;n</a>
+             <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
+                    <li><a href="#"onClick="activar('gestionProdFlujos_principal')">Flujos de producci&oacute;n</a></li>
+                    <li><a href="#"onClick="activar('gestionProdProg_principal')">Programaci&oacute;n de producci&oacute;n</a></li>
+				</ul>
+             </li>
+   
           </ul>
-        </div>
+        </div><!--/.nav-collapse -->
       </div>
     </div>
-	<div id="content">
-		{% block content %}{% endblock %}
-	</div>
-	<div id="footer">
-		{% block footer %}{% endblock %}
-	</div>
+          
+    
+  <!--VENTANA ADMIN-->
+   <div class="container hidden" role="main" id="admin_principal">
+   
+   <div class="jumbotron">
+     <h2>Administrador</h2>
+        <p>Gestione sus usuarios y empleados en este panel</p>
+        <div class="btn-group-justified">
+        
+        <a href="#" class="btn btn-primary btn-md" role="button"><span class="icon icon-users"></span><br>Usuarios &raquo;</a>
+        <a href="#" class="btn btn-primary btn-md" role="button">
+        <span class="icon icon-multiple25"></span><br>Empleados &raquo;</a>
+        <a href="#" class="btn btn-primary btn-md" role="button"><span class="icon icon-cogs"></span><br>Configuraci&oacute;n &raquo;</a>
+        </div>
+      </div>
+   </div>
+    <!--FIN VENTANA ADMIN-->
+    
+    <!--VENTANA GESTION INV-->
+   <div class="container hidden" role="main" id="gestionInv_principal">
+   
+   <div class="jumbotron">
+     <h2>Gesti&oacute;n de Inventarios</h2>
+        <p>Gestione sus existencias en bodega, revise su inventario general, sus compras y proveedores</p>
+        <div class="btn-group-justified">
+        
+        <a href="#" class="btn btn-primary btn-md" role="button"><span class="icon icon-list"></span><br>Productos &raquo;</a>
+        <a href="#" class="btn btn-primary btn-md" role="button">
+        <span class="icon icon-cabinet"></span><br>Bodega &raquo;</a>
+        <a href="#" class="btn btn-primary btn-md" role="button"><span class="icon icon-cart3"></span><br>Compras &raquo;</a>
+        </div>
+        <div class="btn-group-justified">
+        <a href="#" class="btn btn-primary btn-md" role="button"><span class="icon icon-truck"></span><br>Proveedores &raquo;</a>
+        <a href="#" class="btn btn-primary btn-md" role="button"><span class="icon icon-loop2"></span><br>Rotaci&oacute;n &raquo;</a>
+        </div>
+      </div>
+   </div>
+    <!--FIN VENTANA GESTION INV-->
+    
+    <!--VENTANA GESTION FACT-->
+   <div class="container hidden" role="main" id="gestionFact_principal">
+   
+   <div class="jumbotron">
+     <h2>Gesti&oacute;n de Facturaci&oacute;n</h2>
+        <p>Gestione sus clientes, consulte sus ventas y gestione los costos y precios de venta</p>
+        <div class="btn-group-justified">
+        
+        <a href="#" class="btn btn-primary btn-md" role="button"><span class="icon icon-users"></span><br>Clientes &raquo;</a>
+        <a href="#" class="btn btn-primary btn-md" role="button">
+        <span class="icon icon-cart4"></span><br>Venta de productos &raquo;</a>
+        
+        </div>
+        <div class="btn-group-justified">
+        <a href="#" class="btn btn-primary btn-md" role="button"><span class="icon icon-briefcase2"></span><br>Venta de servicios &raquo;</a>
+        <a href="#" class="btn btn-primary btn-md" role="button"><span class="icon icon-search3"></span><br>Consultas &raquo;</a>
+        <!--<a href="#" class="btn btn-primary btn-md" role="button"><span class="icon icon-cogs"></span><br>Costos y precios de venta &raquo;</a>-->
+        </div>
+      </div>
+   </div>
+    <!--FIN VENTANA GESTION FACT-->
+  
+   <!--VENTANA COSTOS Y PRECIOS DE VENTA-->
+   <div class="container hidden" role="main" id="gestionCostos_principal">
+   
+   <div class="jumbotron">
+     <h2>Costos y precios de venta</h2>
+        <p>Gestione los costos y precios de venta de los productos y servicios que ofrece</p>
+        <div class="btn-group">
+        
+        <a href="#" class="btn btn-primary btn-md" role="button"><span class="icon icon-calculate"></span><br>Costos y precios de venta &raquo;</a>
+        </div>
+      </div>
+   </div>
+    <!--FIN VENTANA COSTOS Y PRECIOS DE VENTA-->
+    
+    
+<!--VENTANA PRODUCCION FLUJOS-->
+   <div class="container hidden" role="main" id="gestionProdFlujos_principal">
+   
+   <div class="jumbotron">
+     <h2>Flujos de producci&oacute;n</h2>
+        <p>Verifique los flujos de producci&oacute;n actuales para su empresa</p>
+        <div class="btn-group">
+        
+        <a href="#" class="btn btn-primary btn-md" role="button"><span class="icon icon-flow-cascade"></span><br>Flujos actuales &raquo;</a>
+        </div>
+      </div>
+   </div>
+    <!--FIN VENTANA PRODUCCION-->
+    
+<!--VENTANA PRODUCCION PROGRAMACION-->
+   <div class="container hidden" role="main" id="gestionProdProg_principal">
+   
+   <div class="jumbotron">
+     <h2>Programaci&oacute;n de la producci&oacute;n</h2>
+        <p>Verifique y programe su producci&oacute;n actual</p>
+        <div class="btn-group">
+        
+        <a href="#" class="btn btn-primary btn-md" role="button"><span class="icon icon-calendar"></span><br>Programaci&oacute;n &raquo;</a>
+        </div>
+      </div>
+   </div>
+    <!--FIN VENTANA PRODUCCION-->    
+  
+  
+<!--INICIO VENTANA DE DATOS-->    
+  <div class="container" role="main" id="contenido">
+  <div class="jumbotron">
+    	<div id="content">
+			{% block content %}{% endblock %}
+		</div>
+		<div id="footer">
+			{% block footer %}{% endblock %}
+		</div>
+    </div>
+  </div>
+<!--FIN VENTANA DE DATOS-->    
+  
+   
+<!--javascript testing for menu. 
+Observaciones: Los métodos se migran a la libreria biblioteca.js, lozalizado en static/js-->
+<script>
+/*function activar(capa){
+	//var u;
+	var capa_actual=capa;
+	//$("#menu").hide();
+	//oculta el menu
+	document.getElementById("menu").className="navbar-collapse collapse";//para interfaz movil, retrae menu
+	desactivar();
+	if(document.getElementById(capa_actual).className=="container hidden"){
+		document.getElementById(capa_actual).className="container";
+		document.getElementById(capa_actual).disabled=false;
+		
+		}
+		
+	else if(document.getElementById(capa_actual).className=="container"){
+		document.getElementById(capa_actual).className="container hidden";
+		document.getElementById(capa_actual).disabled=true;
+		
+		}	
+		
+}
+
+function desactivar(){
+	//desactiva las capas visuales del menu principal
+		document.getElementById("admin_principal").className="container hidden";
+		document.getElementById("admin_principal").disabled=true;
+		document.getElementById("gestionInv_principal").className="container hidden";
+		document.getElementById("gestionInv_principal").disabled=true;
+		document.getElementById("gestionFact_principal").className="container hidden";
+		document.getElementById("gestionFact_principal").disabled=true;
+		document.getElementById("gestionCostos_principal").className="container hidden";
+		document.getElementById("gestionCostos_principal").disabled=true;
+		document.getElementById("gestionProdProg_principal").className="container hidden";
+		document.getElementById("gestionProdProg_principal").disabled=true;
+		document.getElementById("gestionProdFlujos_principal").className="container hidden";
+		document.getElementById("gestionProdFlujos_principal").disabled=true;		
+	}*/
+</script>
+
+<!--END javascript testing for menu-->
+	
 
   <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -63,7 +278,8 @@ Proposito: Template base-->
     <script type="text/javascript" src="{{STATIC_URL}}js/jquery/jquery.min.js"></script>
     <script src="{{STATIC_URL}}js/bootstrap.min.js"></script>
     <script src="{{STATIC_URL}}js/docs.min.js"></script>
-	<script src="{{STATIC_URL}}js/biblioteca.js">	
-	</script>
+	<script src="{{STATIC_URL}}js/jquery-ui.js"></script>	
+	<script src="{{STATIC_URL}}js/biblioteca.js">
+	</script>    
   </body>
 </html>
