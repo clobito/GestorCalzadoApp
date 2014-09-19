@@ -65,3 +65,17 @@ function desactivar(){
 		document.getElementById("gestionProdFlujos_principal").className="container hidden";
 		document.getElementById("gestionProdFlujos_principal").disabled=true;		
 	}
+
+function regresa()
+{
+	/*Fecha creado: 08/09/2014
+	Propósito: Regresar al listado después de ingresar detalle de compra.
+	FUENTE: https://docs.djangoproject.com/en/dev/topics/http/urls/
+	Fecha actualizado: 17/09/2014 
+	Cambio realizado: Desactivar metodo, ya que se invoca directamente en el evento.
+	Fecha actualizado: 19/09/2014
+	Cambio realizado: Se activa método en la vista crear_detalle_compra.html */				
+	
+	//location.href='{% url "inventario" %}';
+	location.href='../../inventario/';
+}	
