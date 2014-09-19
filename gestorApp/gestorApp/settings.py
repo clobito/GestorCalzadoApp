@@ -36,6 +36,8 @@ ALLOWED_HOSTS = []
 # Application definition
 # Fecha actualizado: 10/09/2014
 # Cambio realizado: Matricular aplicacion django_evolution en el framework, Ln 47
+# Fecha actualizado: 15/09/2014
+# Cambio realizado: Desactivar modulo django-evolution
 INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.auth',
@@ -43,8 +45,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'web',
-	'django_evolution',
+    'web',	
 )
 
 MIDDLEWARE_CLASSES = (
