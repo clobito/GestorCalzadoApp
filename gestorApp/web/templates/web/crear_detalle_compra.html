@@ -5,7 +5,7 @@ Cambio realizado: Enrutamiento al procesar el formulario, Ln 20
 Fecha actualizado: 17/09/2014
 Cambio realizado: Colocar template al detalle de compra, Ln 8;23-26;34. Renderizar el formulario como tabla, Ln 28-30
 Fecha actualizado: 19/09/2014
-Cambio realizado: Optimizar código Javascript. Se mueve la función regresa() al script biblioteca.js y se invoca método, Ln 23
+Cambio realizado: Optimizar código Javascript. Se mueve la función regresa() al script biblioteca.js y se invoca método, Ln 23. Colocar título al formulario que crea los productos relacionados con la compra, Ln 18
 -->
 {% extends "web/base.html" %}
 <html>	
@@ -15,6 +15,7 @@ Cambio realizado: Optimizar código Javascript. Se mueve la función regresa() a
 			Crear detalle para la compra
 		{% endblock %}
 		{% block content %}		
+			<h2>Creaci&oacute;n de la compra - Registro de productos</h2>
 			<br><br><br><form action="" method="post">{% csrf_token %}
 				<table>
 					{{ form.as_table}}

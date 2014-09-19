@@ -5,6 +5,8 @@ Fecha actualizado: 17/09/2014
 Cambio realizado: Incluir libreria js y estilo css para manejo de Datepicker, Ln 21-22; 71
 Fecha actualizado: 18/09/2014
 Cambio realizado: Integración del Front End (Menús, fuentes, logos), Ln 20,22,26; 40-227
+Fecha actualizado: 19/09/2014
+Cambio realizado: Colocar vinculo Gestión de inventario, relacionado con la opción Rotación, Ln 147
 -->
 <html lang="es">
   <head>
@@ -138,11 +140,11 @@ Cambio realizado: Integración del Front End (Menús, fuentes, logos), Ln 20,22,
         <a href="#" class="btn btn-primary btn-md" role="button"><span class="icon icon-list"></span><br>Productos &raquo;</a>
         <a href="#" class="btn btn-primary btn-md" role="button">
         <span class="icon icon-cabinet"></span><br>Bodega &raquo;</a>
-        <a href="#" class="btn btn-primary btn-md" role="button"><span class="icon icon-cart3"></span><br>Compras &raquo;</a>
+        <a href="{% url 'crearcompra' %}" class="btn btn-primary btn-md" role="button"><span class="icon icon-cart3"></span><br>Compras &raquo;</a>
         </div>
         <div class="btn-group-justified">
         <a href="#" class="btn btn-primary btn-md" role="button"><span class="icon icon-truck"></span><br>Proveedores &raquo;</a>
-        <a href="#" class="btn btn-primary btn-md" role="button"><span class="icon icon-loop2"></span><br>Rotaci&oacute;n &raquo;</a>
+        <a href="{% url 'inventario' %}" class="btn btn-primary btn-md" role="button"><span class="icon icon-loop2"></span><br>Rotaci&oacute;n &raquo;</a>
         </div>
       </div>
    </div>

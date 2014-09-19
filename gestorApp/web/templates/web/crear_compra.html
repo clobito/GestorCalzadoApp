@@ -2,12 +2,15 @@
 Fecha creado: 05/09/2014
 Fecha actualizado: 17/09/2014
 Cambio realizado: Presentación del formulario como tabla, Ln 9-11
+Fecha actualizado: 19/09/2014
+Cambio realizado: Colocar título al formulario que crea la compra, Ln 13
 -->
 {% extends "web/base.html" %}
 {% block title %}
 	Crear la compra
 {% endblock %}
-{% block content %}	
+{% block content %}
+	<h2>Creaci&oacute;n de la compra - Identificaci&oacute;n</h2>
 	<form action="compra" method="post">{% csrf_token %}
 		<br><br><br>
 		<table>
