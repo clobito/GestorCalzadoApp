@@ -2,21 +2,25 @@
 Fecha creado: 03/09/2014
 Fecha actualizado: 12/09/2014
 Propósito: Generar esquema de funcionamiento para el inventario básico
-Cambio realizado: Presentacion sobre un template "hijo" sobre su "padre", Ln 6-10; 39  -->
+Cambio realizado: Presentacion sobre un template "hijo" sobre su "padre", Ln 6-10; 39
+Fecha actualizado: 17/09/2014
+Cambio realizado: Presentacion de la operacion en la grilla, Ln 32-36
+ Fecha actualizado: 18/09/2014
+ Cambio realizado: Ajuste de titulos de la grilla, Ln 15; 19-23-->
 {% extends "web/base.html" %}
 {% block title %}
 	Listado de Inventario
 {% endblock %}
-{% block content %}
-	<h1><br>Grilla para listado de inventario</h1>
+{% block content %}	
+	<strong style="align:center"><h2>Grilla para listado de inventario</h2></strong>
 		<table border=1 size=100%>		
 			<!-- Titulos -->
 			<tr>
-				<td>Material</td>
-				<td>Cantidad</td>
-				<td>Bodega</td>
-				<td>Fecha/Hora</td>
-				<td>Operaci&oacute;n</td>
+				<th align="center">Material</td>
+				<th align="center">Cantidad</td>
+				<th align="center">Bodega</td>
+				<th align="center">Fecha/Hora</td>
+				<th align="center">Operaci&oacute;n</td>
 			</tr>
 			<!-- Codigo para renderizacion del inventario de la BD-->
 			{% if inventario_lst %}
@@ -27,7 +31,11 @@ Cambio realizado: Presentacion sobre un template "hijo" sobre su "padre", Ln 6-1
 				<td>{{elemento.Cantidad}}</td>
 				<td>{{elemento.No_Posicion}}</td>
 				<td>{{elemento.Fecha_Hora}}</td>
-				<td>{{elemento.Operacion}}</td>
+				{% if elemento.Operacion == 'ENT' %}				  
+				<td>Entrante</td>
+				{% elif elemento.Operacion == 'SAL' %}
+				<td>Saliente</td>
+				{% endif %}
 			</tr>
 			{% endfor %}
 			{% else %}

@@ -1,26 +1,27 @@
 <!-- Plantilla para crear detalle de compra, basado en el objeto compra
 Fecha creado: 05/09/2014
+Fecha actualizado: 11/09/2014
+Cambio realizado: Enrutamiento al procesar el formulario, Ln 20
+Fecha actualizado: 17/09/2014
+Cambio realizado: Colocar template al detalle de compra, Ln 8;23-26;34. Renderizar el formulario como tabla, Ln 28-30
+Fecha actualizado: 19/09/2014
+Cambio realizado: Optimizar código Javascript. Se mueve la función regresa() al script biblioteca.js y se invoca método, Ln 23
 -->
-
-<html>
-	<head>
-		<script>
-			function regresa()
-			{
-				/*Fecha creado: 08/09/2014
-				Propósito: Regresar al listado después de ingresar detalle de compra.
-				FUENTE: https://docs.djangoproject.com/en/dev/topics/http/urls/*/				
-				location.href='{% url "inventario" %}';
-			}
-		</script>
-	</head>
+{% extends "web/base.html" %}
+<html>	
 	<body>
-		<form action="detallecompra" method="post">{% csrf_token %}
-			<ul>
-				{{ form.as_ul}}
-			</ul>
-			<input type="submit" name="submit" value="Crear Detalle de compra">
-			<input type="button" name="inventario_btn" value="Regresar al listado" onclick="javascript:regresa()"/>
-		</form>	
+		<!--<form action="{% url 'creardetallecompra' %}" method="post">-->		
+		{% block title %}
+			Crear detalle para la compra
+		{% endblock %}
+		{% block content %}		
+			<br><br><br><form action="" method="post">{% csrf_token %}
+				<table>
+					{{ form.as_table}}
+				</table>
+				<input type="submit" name="submit" value="Crear Detalle de compra">
+				<input type="button" name="inventario_btn" value="Regresar al listado" onclick="javascript:regresa()"/>
+			</form>	
+		{% endblock %}	
 	</body>	
 </html>
