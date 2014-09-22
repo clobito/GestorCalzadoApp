@@ -16,19 +16,23 @@ Cambio realizado: Presentacion de la operacion en la grilla, Ln 32-36
 		<table border=1 size=100%>		
 			<!-- Titulos -->
 			<tr>
-				<th align="center">Material</td>
-				<th align="center">Cantidad</td>
-				<th align="center">Bodega</td>
-				<th align="center">Fecha/Hora</td>
-				<th align="center">Operaci&oacute;n</td>
+				<th align="center">Material</th>
+				<th align="center">Cantidad solicitada</th>
+				<!--<th align="center">Cantidad disponible</th>-->
+				<th align="center">Bodega</th>
+				<th align="center">Fecha/Hora</th>
+				<th align="center">Operaci&oacute;n</th>
 			</tr>
-			<!-- Codigo para renderizacion del inventario de la BD-->
+			<!-- Codigo para renderizacion del inventario de la BD-->			
 			{% if inventario_lst %}
 			{% for elemento in inventario_lst%}
 			<tr>
 				<!-- Elemento del inventario -->
 				<td><strong>{{elemento.Ref_Producto}} </strong></td>
 				<td>{{elemento.Cantidad}}</td>
+				<!--<td>
+				{{elemento.Cantidad_1}}
+				</td>-->
 				<td>{{elemento.No_Posicion}}</td>
 				<td>{{elemento.Fecha_Hora}}</td>
 				{% if elemento.Operacion == 'ENT' %}				  
