@@ -80,15 +80,18 @@ class Conversion_UndVenta_UndCompra(models.Model):
 # Fecha creado: 26/08/2014
 # Fecha actualizado: 27/08/2014
 # Cambio realizado: Especificar observaciones como opcional (27/08/2014), Ln 82
+# Fecha actualizado: 15/09/2014
+# Cambio realizado: Colocar atributo Cantidad, segun modelo de datos en archivo Modelo_DER_SENA_15Sep2014_0938.jpg cargado en Trello.com mediante tarea "Integracion de artes para el modulo de inventarios", Ln 91
 class Producto(models.Model):
 	# Definicion de Atributos
 	Ref_Producto = models.CharField(max_length=20, primary_key = True)
-	Nombre_producto=models.CharField(max_length=70)
-	Linea=models.CharField(max_length=30)
+	Nombre_producto = models.CharField(max_length=70)
+	Linea = models.CharField(max_length=30)
 	#Imagen=models.ImageField(upload_to='files')
-	Imagen=models.ImageField(upload_to='static/files',null=True,blank=True)
-	Observaciones=models.TextField(null = True, blank=True)
-	Unidad_Venta=models.ForeignKey(Conversion_UndVenta_UndCompra)
+	Cantidad = models.IntegerField(max_length=10, null = False, default=0)
+	Imagen = models.ImageField(upload_to='static/files',null=True,blank=True)
+	Observaciones = models.TextField(null = True, blank=True)
+	Unidad_Venta = models.ForeignKey(Conversion_UndVenta_UndCompra)
 	#Conversion_UndVenta_UndCompra=models.ForeignKey(Conversion_UndVenta_UndCompra)
 	# Visualizacion en la grilla
 	def __unicode__(self):
@@ -166,11 +169,15 @@ class DetalleVenta(models.Model):
 # Fecha creado: 27/08/2014
 # Fecha actualizado: 05/09/2014
 # Cambio realizado: Correcion campo No_Compra por No_compra, Ln 179. Correcion valores de retorno con la funcion unicode(). FUENTE: http://stackoverflow.com/questions/16169035/coercing-to-unicode-need-string-or-buffer-nonetype-found-when-rendering-in-dja
+# Fecha actualizado: 15/09/2014
+# Cambio realizado: Adicion al modelo el atributo de cierre de la orden de compra, Ln 179
+# Observaciones: El atributo de la Ln 179, no debe desplegarse en el formulario.
 class Compra_Material(models.Model):
 	# Definicion de Atributos
     No_compra = models.CharField(max_length=15, primary_key = True)
     Fecha = models.DateField()
-    Observaciones=models.TextField(null = True, blank=True)
+    Observaciones = models.TextField(null = True, blank=True)
+    OC_cerrada = models.CharField(max_length=2, default=0)
     # Aparecen desactivados, ya que aun no se han implementado sus clases
 	#Nit_proveedor=models.ForeignKey(Proveedor)
     #CC_empleado=models.ForeignKey(Empleados)
@@ -189,12 +196,22 @@ class Compra_Material(models.Model):
 # Cambio realizado: Especificar llaves foraneas complementarias en el proceso de compra, Ln 199,200.
 # Fecha actualizado: 05/09/2014
 # Cambio realizado: Colocar columna producto, Ln 205
+# Fecha actualizado: 22/09/2014
+# Cambio realizado: Redefinir combo para la variable talla, Ln 206-215
 class Detalle_Compra_Material(models.Model):
 	# Definicion de Atributos
 	id_Detalle = models.AutoField(primary_key=True)
 	Cantidad = models.IntegerField()
-	Precio_Und_Compra = models.DecimalField(max_digits=10, decimal_places=2)
-	Talla = models.CharField(max_length=4)
+	Precio_Und_Compra = models.DecimalField(max_digits=10, decimal_places=2)	
+	#Talla = models.CharField(max_length=4)	
+	TALLAS_VAL = (
+	('S','S'),
+	('M','M'),
+	('L','L'),
+	('XL','XL'),
+	('XXL','XXL'),
+	)
+	Talla = models.CharField(max_length=4, choices=TALLAS_VAL)
 	Color = models.CharField(max_length=30)
 	# Campo opcional
 	Observacion = models.TextField(null = True, blank=True)
