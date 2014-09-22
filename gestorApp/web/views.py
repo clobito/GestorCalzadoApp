@@ -73,8 +73,10 @@ def CrearCompra(request):
 # Observaciones: Para el metodo CargarInventario(), se le envia el proceso Entrante al inventario (ENT)
 # Fecha actualizado: 17/09/2014
 # Cambio realizado: Renderizar el template con el CSS del frontend, Ln 89
+# Fecha actualizado: 22/09/2014
+# Cambio realizado: Derivar los eventos, para causar el cierre de la Orden de compra (FUENTE: http://stackoverflow.com/questions/866272/how-can-i-build-multiple-submit-buttons-django-form), Ln 79
 def CrearDetalleCompra(request):
-	if request.POST:
+	if 'crearprod' in request.POST:
 		form = CrearDetalleCompraForm(request.POST)
 		if form.is_valid():
 			form.save()
@@ -84,6 +86,11 @@ def CrearDetalleCompra(request):
 			prod = request.POST['Ref_Producto']
 			estado = CargarInventario(request, 'ENT', bod, prod)
 			return HttpResponseRedirect('detallecompra')
+	elif 'cierreoc' in request.POST:
+		CerrarOrden(request)
+		inventario = Inventario.objects.select_related('Producto')	
+		return render(request,'web/inventario.html',{'inventario_lst':inventario})
+		
 	# Despliegue del formulario antes de enviar
 	else:
 		form = CrearDetalleCompraForm()
@@ -131,3 +138,12 @@ def ActualizarInventario(request, proc):
 		Prod.Cantidad -= int(request.POST['Cantidad'])
 	#Actualizamos en la base
 	Prod.save()
+
+# Proposito: Cerrar la orden de compra, para no visualizarla al realizar la orden de pedido.
+# Fecha creado: 22/09/2014
+def CerrarOrden(request):
+	ocompra=request.POST['No_compra']
+	Compra=Compra_Material.objects.get(No_compra=ocompra)
+	Compra.OC_cerrada=str(1)
+	#Actualizamos en la base
+	Compra.save()

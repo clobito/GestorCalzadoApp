@@ -6,6 +6,8 @@ Fecha actualizado: 17/09/2014
 Cambio realizado: Colocar template al detalle de compra, Ln 8;23-26;34. Renderizar el formulario como tabla, Ln 28-30
 Fecha actualizado: 19/09/2014
 Cambio realizado: Optimizar código Javascript. Se mueve la función regresa() al script biblioteca.js y se invoca método, Ln 23. Colocar título al formulario que crea los productos relacionados con la compra, Ln 18
+Fecha actualizado: 22/09/2014
+Cambio realizado: Implementar cierre de la orden de compra (submit => 'crearprod') , Ln 25,27
 -->
 {% extends "web/base.html" %}
 <html>	
@@ -20,8 +22,9 @@ Cambio realizado: Optimizar código Javascript. Se mueve la función regresa() a
 				<table>
 					{{ form.as_table}}
 				</table>
-				<input type="submit" name="submit" value="Crear Detalle de compra">
-				<input type="button" name="inventario_btn" value="Regresar al listado" onclick="javascript:regresa()"/>
+				<input type="submit" name="crearprod" value="Crear Detalle de compra"/>
+				<!--<input type="button" name="inventario_btn" value="Regresar al listado" onclick="javascript:regresa()"/>-->
+				<input type="submit" name="cierreoc" value="Regresar al listado"/>
 			</form>	
 		{% endblock %}	
 	</body>	
