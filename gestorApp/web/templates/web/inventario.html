@@ -5,24 +5,27 @@ Propósito: Generar esquema de funcionamiento para el inventario básico
 Cambio realizado: Presentacion sobre un template "hijo" sobre su "padre", Ln 6-10; 39
 Fecha actualizado: 17/09/2014
 Cambio realizado: Presentacion de la operacion en la grilla, Ln 32-36
- Fecha actualizado: 18/09/2014
- Cambio realizado: Ajuste de titulos de la grilla, Ln 15; 19-23-->
+Fecha actualizado: 18/09/2014
+Cambio realizado: Ajuste de titulos de la grilla, Ln 15; 19-23.
+Fecha actualizado: 25/09/2014 
+Cambio realizado: Titulo "Cantidad solicitada"=> "Cantidad ingresada", Ln 23. Integración con el Front End, Ln 17,18,54-->
 {% extends "web/base.html" %}
 {% block title %}
 	Listado de Inventario
 {% endblock %}
 {% block content %}	
 	<strong style="align:center"><h2>Grilla para listado de inventario</h2></strong>
-		<table border=1 size=100%>		
+    <div class="row">
+		<table class="table">		
 			<!-- Titulos -->
-			<tr>
+			<thead>
 				<th align="center">Material</th>
-				<th align="center">Cantidad solicitada</th>
+				<th align="center">Cantidad ingresada</th>
 				<!--<th align="center">Cantidad disponible</th>-->
 				<th align="center">Bodega</th>
 				<th align="center">Fecha/Hora</th>
 				<th align="center">Operaci&oacute;n</th>
-			</tr>
+			</thead>
 			<!-- Codigo para renderizacion del inventario de la BD-->			
 			{% if inventario_lst %}
 			{% for elemento in inventario_lst%}
@@ -48,4 +51,5 @@ Cambio realizado: Presentacion de la operacion en la grilla, Ln 32-36
 			</table>
 			{% endif %}
 		</table>
+        </div>
 {% endblock %}

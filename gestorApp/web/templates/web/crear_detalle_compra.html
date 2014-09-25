@@ -7,7 +7,9 @@ Cambio realizado: Colocar template al detalle de compra, Ln 8;23-26;34. Renderiz
 Fecha actualizado: 19/09/2014
 Cambio realizado: Optimizar código Javascript. Se mueve la función regresa() al script biblioteca.js y se invoca método, Ln 23. Colocar título al formulario que crea los productos relacionados con la compra, Ln 18
 Fecha actualizado: 22/09/2014
-Cambio realizado: Implementar cierre de la orden de compra (submit => 'crearprod') , Ln 25,27
+Cambio realizado: Implementar cierre de la orden de compra (submit => 'crearprod')(FUENTE:http://stackoverflow.com/questions/866272/how-can-i-build-multiple-submit-buttons-django-form), Ln 25,27.
+Fecha actualizado: 25/09/2014
+Cambio realizado: Integración con el Front End, Ln 24
 -->
 {% extends "web/base.html" %}
 <html>	
@@ -19,12 +21,12 @@ Cambio realizado: Implementar cierre de la orden de compra (submit => 'crearprod
 		{% block content %}		
 			<h2>Creaci&oacute;n de la compra - Registro de productos</h2>
 			<br><br><br><form action="" method="post">{% csrf_token %}
-				<table>
+				<table class="table">
 					{{ form.as_table}}
 				</table>
-				<input type="submit" name="crearprod" value="Crear Detalle de compra"/>
+				<input type="submit" name="crearprod" value="Crear Detalle de compra" class="btn btn-default"/>
 				<!--<input type="button" name="inventario_btn" value="Regresar al listado" onclick="javascript:regresa()"/>-->
-				<input type="submit" name="cierreoc" value="Regresar al listado"/>
+				<input type="submit" name="cierreoc" value="Regresar al listado" class="btn btn-default"/>
 			</form>	
 		{% endblock %}	
 	</body>	

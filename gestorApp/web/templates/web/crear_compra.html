@@ -4,6 +4,8 @@ Fecha actualizado: 17/09/2014
 Cambio realizado: Presentación del formulario como tabla, Ln 9-11
 Fecha actualizado: 19/09/2014
 Cambio realizado: Colocar título al formulario que crea la compra, Ln 13
+Fecha actualizado: 25/09/2014
+Cambio realizado: Inclusión de clases gráficas al formulario, Ln 23-28
 -->
 {% extends "web/base.html" %}
 {% block title %}
@@ -12,10 +14,16 @@ Cambio realizado: Colocar título al formulario que crea la compra, Ln 13
 {% block content %}
 	<h2>Creaci&oacute;n de la compra - Identificaci&oacute;n</h2>
 	<form action="compra" method="post">{% csrf_token %}
-		<br><br><br>
-		<table>
+		<br><br>
+		<table class="table">
 			{{ form.as_table}}
 		</table>
-		<input type="submit" name="submit" value="Crear compra"/>		
+		<input type="submit" name="submit" value="Crear compra" class="btn btn-primary"/>		
 	</form>	
+    <script>
+	
+	document.getElementById("id_Observaciones").className="form-control";
+	document.getElementById("id_No_compra").className="form-control";
+
+	</script>
 {% endblock %}
