@@ -9,7 +9,7 @@ Cambio realizado: Optimizar código Javascript. Se mueve la función regresa() a
 Fecha actualizado: 22/09/2014
 Cambio realizado: Implementar cierre de la orden de compra (submit => 'crearprod')(FUENTE:http://stackoverflow.com/questions/866272/how-can-i-build-multiple-submit-buttons-django-form), Ln 25,27.
 Fecha actualizado: 25/09/2014
-Cambio realizado: Integración con el Front End, Ln 24
+Cambio realizado: Integración con el Front End, Ln 24,27,29
 -->
 {% extends "web/base.html" %}
 <html>	
@@ -24,9 +24,9 @@ Cambio realizado: Integración con el Front End, Ln 24
 				<table class="table">
 					{{ form.as_table}}
 				</table>
-				<input type="submit" name="crearprod" value="Crear Detalle de compra" class="btn btn-default"/>
+				<input type="submit" name="crearprod" value="Crear Detalle de compra" class="btn btn-primary"/>
 				<!--<input type="button" name="inventario_btn" value="Regresar al listado" onclick="javascript:regresa()"/>-->
-				<input type="submit" name="cierreoc" value="Regresar al listado" class="btn btn-default"/>
+				<input type="submit" name="cierreoc" value="Regresar al listado" class="btn btn-primary"/>
 			</form>	
 		{% endblock %}	
 	</body>	
