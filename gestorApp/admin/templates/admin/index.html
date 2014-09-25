@@ -1,0 +1,102 @@
+<!-- Propósito: Visualización del módulo del sistema, después de autenticar de manera satisfactoria.
+Fecha actualizado: 23/09/2014
+Cambio realizado: Se suprime la clausula else correspondiente a usuarios que no tengan operaciones asignadas en cada grupo, Ln 50-54 (DEL)
+Observaciones: El grupo que no tenga permisos, será tomado como usuario que usará el menú.
+Fecha actualizado: 24/09/2014
+Cambio realizado: Colocar los vinculos Cambiar contraseña y Terminar sesión, Ln 25-34
+Fecha actualizado: 25/09/2014
+Cambio realizado: Desactivar opción Cerrar Sesión y activar la opción Cambiar contraseña, ya que, la opción de Cerrar Sesión queda como template, Ln 23-33 -->
+
+{% extends "admin/base_site.html" %}
+{% load i18n admin_static %}
+
+{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "admin/css/dashboard.css" %}" />{% endblock %}
+
+{% block coltype %}colMS{% endblock %}
+
+{% block bodyclass %}{{ block.super }} dashboard{% endblock %}
+
+{% block breadcrumbs %}{% endblock %}
+
+{% block content %}
+<div id="content-main">
+	<div class="app-{{ app.app_label }} module">
+			<table align="right" >
+				<tr class="section">
+					<td align="left" size="20">
+						<a href="/admin/password_change/" class="section">Cambiar contrase&ntilde;a</a>
+					</td>
+					<!--<td align="right" size="20">
+						<a href="/admin/logout/" class="section">Cerrar sesi&oacute;n</a>
+					</td>-->	
+				</tr>
+			</table>
+{% if app_list %}
+    {% for app in app_list %}
+        
+        <table>
+        <caption>			
+            <a href="{{ app.app_url }}" class="section" title="{% blocktrans with name=app.name %}Models in the {{ name }} application{% endblocktrans %}">{{ app.name }}</a>			
+			
+        </caption>
+        {% for model in app.models %}
+            <tr class="model-{{ model.object_name|lower }}">
+            {% if model.admin_url %}
+                <th scope="row"><a href="{{ model.admin_url }}">{{ model.name }}</a></th>
+            {% else %}
+                <th scope="row">{{ model.name }}</th>
+            {% endif %}
+
+            {% if model.add_url %}
+                <td><a href="{{ model.add_url }}" class="addlink">{% trans 'Add' %}</a></td>
+            {% else %}
+                <td>&nbsp;</td>
+            {% endif %}
+
+            {% if model.admin_url %}
+                <td><a href="{{ model.admin_url }}" class="changelink">{% trans 'Change' %}</a></td>
+            {% else %}
+                <td>&nbsp;</td>
+            {% endif %}
+            </tr>
+        {% endfor %}
+        </table>
+        </div>
+    {% endfor %}
+{% endif %}
+<!-- Vinculos -->
+
+</div>
+{% endblock %}
+
+{% block sidebar %}
+<div id="content-related">
+    <div class="module" id="recent-actions-module">
+        <h2>{% trans 'Recent Actions' %}</h2>
+        <h3>{% trans 'My Actions' %}</h3>
+            {% load log %}
+            {% get_admin_log 10 as admin_log for_user user %}
+            {% if not admin_log %}
+            <p>{% trans 'None available' %}</p>
+            {% else %}
+            <ul class="actionlist">
+            {% for entry in admin_log %}
+            <li class="{% if entry.is_addition %}addlink{% endif %}{% if entry.is_change %}changelink{% endif %}{% if entry.is_deletion %}deletelink{% endif %}">
+                {% if entry.is_deletion or not entry.get_admin_url %}
+                    {{ entry.object_repr }}
+                {% else %}
+                    <a href="{{ entry.get_admin_url }}">{{ entry.object_repr }}</a>
+                {% endif %}
+                <br/>
+                {% if entry.content_type %}
+                    <span class="mini quiet">{% filter capfirst %}{% trans entry.content_type.name %}{% endfilter %}</span>
+                {% else %}
+                    <span class="mini quiet">{% trans 'Unknown content' %}</span>
+                {% endif %}
+            </li>
+            {% endfor %}
+            </ul>
+            {% endif %}
+    </div>
+</div>
+{% endblock %}

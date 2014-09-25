@@ -7,6 +7,9 @@ Fecha actualizado: 18/09/2014
 Cambio realizado: Integración del Front End (Menús, fuentes, logos), Ln 20,22,26; 40-227
 Fecha actualizado: 19/09/2014
 Cambio realizado: Colocar vinculo Gestión de inventario, relacionado con la opción Rotación, Ln 147
+Fecha actualizado: 25/09/2014.
+Cambio realizado: Colocar la opción cerrar sesión en la parte inferior, Ln 250-262. Colocar vinculo de Cerrar Sesión, Ln 257
+Observaciones: Se envía cambios según comunicado "Re: Vistas del Backend para integrar al Frontend", 24/09/2014, 15:22
 -->
 <html lang="es">
   <head>
@@ -20,17 +23,19 @@ Cambio realizado: Colocar vinculo Gestión de inventario, relacionado con la opc
 
     <!-- Bootstrap core CSS -->
    <link href="{{STATIC_URL}}css/bootstrap.min2.css" rel="stylesheet">
-    <!-- Bootstrap theme -->
+    <!-- Bootstrap theme-->
    <link href="{{STATIC_URL}}css/bootstrap-theme2.min.css" rel="stylesheet">
 	<!-- CSS de Datepicker -->
 	<link href="{{STATIC_URL}}css/jquery-ui.css" rel="stylesheet">
-	<!-- CSS de fonts -->
+	<!-- CSS de fonts-->
 	<link href="{{STATIC_URL}}fonts/style.css" rel="stylesheet">	
  	<!-- Custom styles for this template -->
 	<!-- <link href="css/theme.css" rel="stylesheet">-->
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="{{STATIC_URL}}js/ie10-viewport-bug-workaround.js"></script>
+        
+    
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -55,10 +60,13 @@ Cambio realizado: Colocar vinculo Gestión de inventario, relacionado con la opc
           </button>
           
 
-          <a class="navbar-brand"><div class="nav-helper"><span class="logo-image"></span>Centro de Manufactura Textil y Cuero<br><p>Gesti&oacute;n de la producci&oacute;n</p></div></a>
+          <a class="navbar-brand"><div class="nav-helper"><span class="logo-image"></span>Centro de Manufactura Textil y Cuero<br><p>Gesti&oacute;n de la producci&oacute;n</p></div></a> 
         </div>
+        
         <div class="navbar-collapse collapse" id="menu">
+        
           <ul class="nav navbar-nav">
+         
           
 <!--plantila base del menu con submenus          
 
@@ -86,30 +94,41 @@ Cambio realizado: Colocar vinculo Gestión de inventario, relacionado con la opc
         
         -->
 <!--BASE DISEÑO NUEVO-->     
+<li class="divider-vertical"></li>
            <li><a href="#" onClick="activar('admin_principal')">Administrador</a></li>
+           <li class="divider-vertical"></li>
             <li class="dropdown"><a role="menu" data-toggle="dropdown" class="dropdown-toggle" data-target="#" href="">Gesti&oacute;n de Inventarios</a>
             	<ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
                     <li><a href="#" onClick="activar('gestionInv_principal')">Inventario</a></li>
                     <li><a href="#">Consumo de Materiales</a></li>
 				</ul>
             </li>
+            
+            <li class="divider-vertical"></li>
+            
             <li class="dropdown"><a role="menu" data-toggle="dropdown" class="dropdown-toggle" data-target="#" href="">Gesti&oacute;n de Facturaci&oacute;n</a>
             <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
                     <li><a href="#" onClick="activar('gestionFact_principal')">Facturaci&oacute;n</a></li>
                     <li><a href="#" onClick="activar('gestionCostos_principal')">Costos y precios de venta</a></li>
 				</ul>
             </li>
+            
+            <li class="divider-vertical"></li>
+            
              <li class="dropdown"><a role="menu" data-toggle="dropdown" class="dropdown-toggle" data-target="#" href="">Producci&oacute;n</a>
-             <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
+             <ul class="dropdown-menu multi-level drop-left" role="menu" aria-labelledby="dropdownMenu">
                     <li><a href="#"onClick="activar('gestionProdFlujos_principal')">Flujos de producci&oacute;n</a></li>
                     <li><a href="#"onClick="activar('gestionProdProg_principal')">Programaci&oacute;n de producci&oacute;n</a></li>
 				</ul>
              </li>
+             <li class="divider-vertical"></li>
    
           </ul>
         </div><!--/.nav-collapse -->
       </div>
     </div>
+    
+    
           
     
   <!--VENTANA ADMIN-->
@@ -229,6 +248,20 @@ Cambio realizado: Colocar vinculo Gestión de inventario, relacionado con la opc
   </div>
 <!--FIN VENTANA DE DATOS-->    
   
+  
+  <!--INICIO BARRA DE ABAJO-->
+  <nav class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">
+  <div class="container">
+  
+    <div class="navbar-text navbar-left">
+    <a href="/admin/logout/" class="navbar-link">Cerrar sesion</a>
+    </div>
+    
+
+  </div>
+</nav>
+
+  <!--FIN BARRA DE ABAJO-->
    
 <!--javascript testing for menu. 
 Observaciones: Los métodos se migran a la libreria biblioteca.js, lozalizado en static/js-->
@@ -282,6 +315,8 @@ function desactivar(){
     <script src="{{STATIC_URL}}js/docs.min.js"></script>
 	<script src="{{STATIC_URL}}js/jquery-ui.js"></script>	
 	<script src="{{STATIC_URL}}js/biblioteca.js">
-	</script>    
+	</script>
+    
+     
   </body>
 </html>
