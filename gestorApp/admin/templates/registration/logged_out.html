@@ -1,0 +1,18 @@
+<!-- Propósito: Visualizar la salida del sistema.
+Fecha actualizado: 23/09/2014
+Cambio realizado: Especificar el template cuando se cierra la sesión del sistema, Ln 4. Colocar mensaje vacio para cierre de sesión, Ln 11.
+Fecha actualizado: 24/09/2014
+Cambio realizado: Redirecionar de manera directa al login al cerrar sesión (FUENTE: http://stackoverflow.com/questions/5411538/how-to-redirect-from-an-html-page, Ln 14-15-->
+{% extends "admin/base_inicio.html" %}
+{% load i18n %}
+
+{% block breadcrumbs %}<div class="breadcrumbs"><a href="{% url 'admin:index' %}">{% trans 'Home' %}</a></div>{% endblock %}
+
+{% block content %}
+
+<p>{% trans " " %}</p>
+Cerrando sesión
+<meta http-equiv="refresh" content="0; url={% url 'admin:index' %}">
+
+{% endblock %}
+
