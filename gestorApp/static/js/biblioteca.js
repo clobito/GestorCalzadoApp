@@ -78,4 +78,25 @@ function regresa()
 	
 	//location.href='{% url "inventario" %}';
 	location.href='../../inventario/';
-}	
+}
+
+$('#action-toggle').click(function()
+{	
+	/*Propósito: Realizar un fix a nivel de checkbox, que permita seleccionar o deseleccionar todos los objetos.
+	Fecha creado: 29/09/2014
+	*/	
+	$('.action-select').each(function()
+	{
+		if ($('#action-toggle').is(':checked'))
+		{
+			$('input.action-select').attr("checked",true)			
+		}
+		else
+		{
+			$('input.action-select').removeAttr('checked');			
+		}
+	}
+	);	
+
+});
+	

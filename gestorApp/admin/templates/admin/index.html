@@ -5,7 +5,12 @@ Observaciones: El grupo que no tenga permisos, será tomado como usuario que usa
 Fecha actualizado: 24/09/2014
 Cambio realizado: Colocar los vinculos Cambiar contraseña y Terminar sesión, Ln 25-34
 Fecha actualizado: 25/09/2014
-Cambio realizado: Desactivar opción Cerrar Sesión y activar la opción Cambiar contraseña, ya que, la opción de Cerrar Sesión queda como template, Ln 23-33 -->
+Cambio realizado: Desactivar opción Cerrar Sesión y activar la opción Cambiar contraseña, ya que, la opción de Cerrar Sesión queda como template, Ln 23-33
+Fecha actualizado: 29/09/2014
+Cambio realizado: Ajuste del desarrollo gráfico del Front end. Personalización del titulo, Ln 41,43  --> 
+
+
+
 
 {% extends "admin/base_site.html" %}
 {% load i18n admin_static %}
@@ -21,7 +26,7 @@ Cambio realizado: Desactivar opción Cerrar Sesión y activar la opción Cambiar
 {% block content %}
 <div id="content-main">
 	<div class="app-{{ app.app_label }} module">
-			<table align="right" >
+			<table align="right">
 				<tr class="section">
 					<td align="left" size="20">
 						<a href="/admin/password_change/" class="section">Cambiar contrase&ntilde;a</a>
@@ -33,14 +38,15 @@ Cambio realizado: Desactivar opción Cerrar Sesión y activar la opción Cambiar
 			</table>
 {% if app_list %}
     {% for app in app_list %}
-        
-        <table>
-        <caption>			
-            <a href="{{ app.app_url }}" class="section" title="{% blocktrans with name=app.name %}Models in the {{ name }} application{% endblocktrans %}">{{ app.name }}</a>			
-			
+        <div class="panel panel-primary">
+          <table class="table table-bordered table-hover">
+
+        <caption>
+            <a href="{{ app.app_url }}" class="section h2 panel-title" title="{% blocktrans with name=app.name %}Personalice la información requerida{% endblocktrans %}">Personalizar Par&aacute;metros del sistema</a>			
         </caption>
+        
         {% for model in app.models %}
-            <tr class="model-{{ model.object_name|lower }}">
+            <tr class="model-{{ model.object_name|lower }} panel-body">
             {% if model.admin_url %}
                 <th scope="row"><a href="{{ model.admin_url }}">{{ model.name }}</a></th>
             {% else %}
@@ -61,6 +67,7 @@ Cambio realizado: Desactivar opción Cerrar Sesión y activar la opción Cambiar
             </tr>
         {% endfor %}
         </table>
+        </div>
         </div>
     {% endfor %}
 {% endif %}
@@ -100,3 +107,5 @@ Cambio realizado: Desactivar opción Cerrar Sesión y activar la opción Cambiar
     </div>
 </div>
 {% endblock %}
+
+

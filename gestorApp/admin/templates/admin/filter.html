@@ -1,0 +1,15 @@
+<!-- Propósito: Listado de filtro por componente seleccionado.
+Fecha actualizado: 29/09/2014
+Cambio realizado: Ajuste al desarrollo gráfico, Ln 5,7,8-->
+{% load i18n %}
+<div class="panel panel-primary">
+<div class="panel-heading">
+<h3 class="panel-title">{% blocktrans with filter_title=title %} By {{ filter_title }} {% endblocktrans %}</h3>
+</div>
+<ul class="list-group">
+{% for choice in choices %}
+    <li class="list-group-item" {% if choice.selected %} class="list-group-item selected"{% endif %}>
+    <a href="{{ choice.query_string|iriencode }}">{{ choice.display }}</a></li>
+{% endfor %}
+</ul>
+</div>
