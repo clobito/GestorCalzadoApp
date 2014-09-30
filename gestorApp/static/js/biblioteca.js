@@ -3,6 +3,8 @@ Biblioteca de funciones
 Fecha creado: 17/09/2014
 Fecha actualizado: 18/09/2014
 Cambio realizado: Configuración del componente fecha empleando datepicker como plugin de jquery.
+Fecha actualizado: 30/09/2014
+Cambio realizado: Implementar los controles de fecha, sobre los campos último inicio de sesión (1 semana a pasado, no futuro) y fecha de alta (1 mes a futuro, no pasado), Ln 29-44;45-60
 Observaciones: Componente Datepicker en español en http://www.bufa.es/jquery-ui-datepicker-espanol/
 */
 
@@ -24,7 +26,41 @@ $(document).ready(function()
 		dateFormat: 'yy-mm-dd',
 		firstDay: 1,
 	});
+	$('#id_last_login_0').datepicker({		
+		language: 'es',
+		closeText: 'Cerrar',
+		defaultDate: '+0',
+		maxDate: '0d',
+		minDate: '-8d',		
+		monthNames: ["Enero",
+		"Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"],
+		monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
+		dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+        dayNamesShort: ['Dom','Lun','Mar','Mie','Jue','Vie','Sab'],
+		dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sa'],
+		showWeek: 'True',
+		dateFormat: 'dd/mm/yy',
+		firstDay: 1,
+	});
+	$('#id_date_joined_0').datepicker({		
+		language: 'es',
+		closeText: 'Cerrar',
+		defaultDate: '+0',
+		maxDate: '+1m',
+		minDate: '0d',		
+		monthNames: ["Enero",
+		"Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"],
+		monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
+		dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+        dayNamesShort: ['Dom','Lun','Mar','Mie','Jue','Vie','Sab'],
+		dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sa'],
+		showWeek: 'True',
+		dateFormat: 'dd/mm/yy',
+		firstDay: 1,
+	});
 });
+
+ 
 /* Métodos del template base.html 
 Fecha actualizado: 18/09/2014
 */
@@ -105,5 +141,8 @@ function abrir_usuarios()
 	/*Propósito: Establecer una ventana flotante para manipular usuarios del sistema.
 	Fecha creado: 29/09/2014
 	*/
-	window.open('/admin/auth/user/?is_superuser__exact=0','_blank','navigation=no,toolbar=yes, scrollbars=yes, resizable=no,height=10px,width=10px');
+	window.open('/admin/auth/user/?is_superuser__exact=0','_blank','navigation=no,toolbar=yes, scrollbars=yes, resizable=no,height=1390px,width=790px');
 }	
+
+/*var django = django || {};
+django.jQuery = jQuery.noConflict(true); */
