@@ -99,4 +99,11 @@ $('#action-toggle').click(function()
 	);	
 
 });
-	
+
+function abrir_usuarios()
+{
+	/*Propósito: Establecer una ventana flotante para manipular usuarios del sistema.
+	Fecha creado: 29/09/2014
+	*/
+	window.open('/admin/auth/user/?is_superuser__exact=0','_blank','navigation=no,toolbar=yes, scrollbars=yes, resizable=no,height=10px,width=10px');
+}	

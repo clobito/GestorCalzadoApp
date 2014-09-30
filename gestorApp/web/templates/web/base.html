@@ -8,8 +8,10 @@ Cambio realizado: Integración del Front End (Menús, fuentes, logos), Ln 20,22,
 Fecha actualizado: 19/09/2014
 Cambio realizado: Colocar vinculo Gestión de inventario, relacionado con la opción Rotación, Ln 147
 Fecha actualizado: 25/09/2014.
-Cambio realizado: Colocar la opción cerrar sesión en la parte inferior, Ln 250-262. Colocar vinculo de Cerrar Sesión, Ln 257
+Cambio realizado: Colocar la opción cerrar sesión en la parte inferior, Ln 250-262. 
 Observaciones: Se envía cambios según comunicado "Re: Vistas del Backend para integrar al Frontend", 24/09/2014, 15:22
+Fecha actualizado: 29/09/2014
+Cambio realizado: Integrar las funciones de la opción Inventarios: Productos, Bodega, Proveedores, Ln 160-162;166. Integrar las funciones de la opción Administrador: Usuarios, Ln 143,144
 -->
 <html lang="es">
   <head>
@@ -44,8 +46,7 @@ Observaciones: Se envía cambios según comunicado "Re: Vistas del Backend para 
     <![endif]-->
   </head>
 
-  <body>	
-  
+  <body>		
      <!-- Fixed navbar -->
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">
@@ -139,8 +140,8 @@ Observaciones: Se envía cambios según comunicado "Re: Vistas del Backend para 
         <p>Gestione sus usuarios y empleados en este panel</p>
         <div class="btn-group-justified">
         
-        <a href="#" class="btn btn-primary btn-md" role="button"><span class="icon icon-users"></span><br>Usuarios &raquo;</a>
-        <a href="#" class="btn btn-primary btn-md" role="button">
+        <a onclick="abrir_usuarios()" class="btn btn-primary btn-md" role="button"><span class="icon icon-users"></span><br>Usuarios &raquo;</a>
+        <a href="/admin/web/empleado" class="btn btn-primary btn-md" role="button">
         <span class="icon icon-multiple25"></span><br>Empleados &raquo;</a>
         <a href="#" class="btn btn-primary btn-md" role="button"><span class="icon icon-cogs"></span><br>Configuraci&oacute;n &raquo;</a>
         </div>
@@ -156,13 +157,13 @@ Observaciones: Se envía cambios según comunicado "Re: Vistas del Backend para 
         <p>Gestione sus existencias en bodega, revise su inventario general, sus compras y proveedores</p>
         <div class="btn-group-justified">
         
-        <a href="#" class="btn btn-primary btn-md" role="button"><span class="icon icon-list"></span><br>Productos &raquo;</a>
-        <a href="#" class="btn btn-primary btn-md" role="button">
+        <a href="/admin/web/producto" class="btn btn-primary btn-md" role="button"><span class="icon icon-list"></span><br>Productos &raquo;</a>
+        <a href="/admin/web/bodega" class="btn btn-primary btn-md" role="button">
         <span class="icon icon-cabinet"></span><br>Bodega &raquo;</a>
         <a href="{% url 'crearcompra' %}" class="btn btn-primary btn-md" role="button"><span class="icon icon-cart3"></span><br>Compras &raquo;</a>
         </div>
         <div class="btn-group-justified">
-        <a href="#" class="btn btn-primary btn-md" role="button"><span class="icon icon-truck"></span><br>Proveedores &raquo;</a>
+        <a href="/admin/web/proveedor" class="btn btn-primary btn-md" role="button"><span class="icon icon-truck"></span><br>Proveedores &raquo;</a>
         <a href="{% url 'inventario' %}" class="btn btn-primary btn-md" role="button"><span class="icon icon-loop2"></span><br>Rotaci&oacute;n &raquo;</a>
         </div>
       </div>
