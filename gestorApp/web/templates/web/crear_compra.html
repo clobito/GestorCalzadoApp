@@ -6,6 +6,8 @@ Fecha actualizado: 19/09/2014
 Cambio realizado: Colocar título al formulario que crea la compra, Ln 13
 Fecha actualizado: 25/09/2014
 Cambio realizado: Inclusión de clases gráficas al formulario, Ln 23-28
+Fecha actualizado: 30/09/2014
+Cambio realizado: Desactivar clase form-control al campo No_compra, Ln 28 
 -->
 {% extends "web/base.html" %}
 {% block title %}
@@ -23,7 +25,7 @@ Cambio realizado: Inclusión de clases gráficas al formulario, Ln 23-28
     <script>
 	
 	document.getElementById("id_Observaciones").className="form-control";
-	document.getElementById("id_No_compra").className="form-control";
+	/*document.getElementById("id_No_compra").className="form-control";*/
 
 	</script>
 {% endblock %}

@@ -25,19 +25,22 @@ class CargarInventarioForm(forms.ModelForm):
 # Cambio realizado: Implementar formulario de compra, desplegando los 3 campos: Numero de compra, Fecha y Observaciones, Ln 29
 # Fecha actualizado: 17/09/2014
 # Cambio realizado: Colocar campo No_compra como entero y validandolo con valores > 0, Ln 29, 32
+# Fecha actualizado: 30/09/2014
+# Cambio realizado: Implementar el orden correcto de los campos, excluyendo los que no se muestran en la vista (FUENTE: http://stackoverflow.com/questions/2893471/how-can-i-order-fields-in-django-modelform), Ln 35
 #class CrearCompraForm(forms.ModelForm):
-class CompraForm(forms.ModelForm):		
+class CompraForm(forms.ModelForm):	
+	No_compra = forms.IntegerField(min_value=1,label="Numero de compra")
 	class Meta:
 		model=Compra_Material
-		fields=('Fecha','Observaciones')
+		exclude = ('OC_cerrada',)		
 # Fecha creado: 17/09/2014
 # Proposito: Crear el numero de orden de compra que herede de la compra. FUENTE: https://code.djangoproject.com/wiki/CookBookNewFormsFieldOrdering
 class CrearCompraForm(CompraForm):
-	No_compra = forms.IntegerField(min_value=1)
+	#No_compra = forms.IntegerField(min_value=1)
 	
-	def __init__(self, *args, **kwargs):
+	"""def __init__(self, *args, **kwargs):
 		super(CrearCompraForm, self).__init__(*args, **kwargs)
-		self.fields.keyOrder = ['No_compra','Fecha','Observaciones']		
+		self.fields.keyOrder = ['No_compra','Fecha','Observaciones']"""
 # Formulario para crear detalle de compra, asociado a la compra.
 # Fecha creado: 08/09/2014
 # Fecha actualizado: 15/09/2014

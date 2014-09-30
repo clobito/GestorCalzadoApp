@@ -172,15 +172,17 @@ class DetalleVenta(models.Model):
 # Fecha actualizado: 15/09/2014
 # Cambio realizado: Adicion al modelo el atributo de cierre de la orden de compra, Ln 179
 # Observaciones: El atributo de la Ln 179, no debe desplegarse en el formulario.
+# Fecha actualizado: 30/09/2014
+# Proposito: Activar campos de las entidades Proveedor y Empleado, Ln 184,185
 class Compra_Material(models.Model):
 	# Definicion de Atributos
     No_compra = models.CharField(max_length=15, primary_key = True)
     Fecha = models.DateField()
     Observaciones = models.TextField(null = True, blank=True)
     OC_cerrada = models.CharField(max_length=2, default=0)
-    # Aparecen desactivados, ya que aun no se han implementado sus clases
-	#Nit_proveedor=models.ForeignKey(Proveedor)
-    #CC_empleado=models.ForeignKey(Empleados)
+	# Aparecen desactivados, ya que aun no se han implementado sus clases
+    Nit_proveedor=models.ForeignKey(Proveedor)
+    CC_empleado=models.ForeignKey(Empleado)
 	# Visualizacion en la grilla
     def __unicode__(self):
 	    #Desactivado, , ya que aun no se han implementado sus clases
