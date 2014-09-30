@@ -12,6 +12,8 @@ Cambio realizado: Colocar la opción cerrar sesión en la parte inferior, Ln 250
 Observaciones: Se envía cambios según comunicado "Re: Vistas del Backend para integrar al Frontend", 24/09/2014, 15:22
 Fecha actualizado: 29/09/2014
 Cambio realizado: Integrar las funciones de la opción Inventarios: Productos, Bodega, Proveedores, Ln 160-162;166. Integrar las funciones de la opción Administrador: Usuarios, Ln 143,144
+Fecha actualizado: 30/09/2014
+Cambio realizado: Incluir bibliotecas Javascript correspondiente al módulo Administrador (Integración), Ln 
 -->
 <html lang="es">
   <head>
@@ -314,10 +316,24 @@ function desactivar(){
     <script type="text/javascript" src="{{STATIC_URL}}js/jquery/jquery.min.js"></script>
     <script src="{{STATIC_URL}}js/bootstrap.min.js"></script>
     <script src="{{STATIC_URL}}js/docs.min.js"></script>
+	<script src="{{STATIC_URL}}js/jquery-ui.js"></script>
+	<script src="{{STATIC_URL}}admin/js/admin/RelatedObjectLookups.js"></script>	
+	<script src="{{STATIC_URL}}js/biblioteca.js">
+	</script>
+	
+	<!--<script type="text/javascript" src="{{STATIC_URL}}js/jquery/jquery.min.js"></script>
+    <script src="{{STATIC_URL}}js/bootstrap.min.js"></script>
+    <script src="{{STATIC_URL}}js/docs.min.js"></script>
 	<script src="{{STATIC_URL}}js/jquery-ui.js"></script>	
 	<script src="{{STATIC_URL}}js/biblioteca.js">
 	</script>
-    
-     
+    <script src="{{STATIC_URL}}admin/js/core.js"></script>
+    <script src="{{STATIC_URL}}admin/js/jquery.init.js"></script>
+	<script src="{{STATIC_URL}}admin/js/actions.js"></script>
+	<script src="{{STATIC_URL}}admin/js/SelectBox.js"></script>
+	<script src="{{STATIC_URL}}admin/js/SelectFilter2.js"></script>
+	<script src="{{STATIC_URL}}admin/js/calendar.js"></script>
+	<script src="{{STATIC_URL}}admin/js/admin/DateTimeShortcuts.js"></script>
+	-->	
   </body>
 </html>
