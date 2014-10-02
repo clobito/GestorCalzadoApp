@@ -87,6 +87,20 @@ class Detalle_Compra_MaterialesAdmin(admin.ModelAdmin):
 	# Definicion de filtros
 	list_filter = ['Observacion',]	
 	search_fields = ['Observacion', 'Ref_Producto__Nombre_producto', 'Talla', 'Color', 'No_compra__No_compra']
+# Proposito: Establecer filtro para el objeto proveedor
+# Fecha creado: 02/10/2014
+class ProveedorAdmin(admin.ModelAdmin):
+	list_display = ('get_doc','get_nom');
+	def get_doc(self, obj):
+		return obj.Identificacion_Documento
+	def get_nom(self, obj):
+		return obj.Nombre
+	get_doc.short_description = 'Identificacion'
+	get_doc.admin_order_field = 'Identificacion_Documento'
+	get_nom.short_description = 'Nombres Proveedor'
+	#Definicion de filtros
+	list_filter = ['Identificacion_Documento']
+	search_fields = ['Identificacion_Documento','Nombre']
 # Register your models here.
 # Registro de los modulos Empresa, Usuarios, Bodegas, Conversiones, Productos
 # Fecha creado: 26/08/2014.
@@ -95,6 +109,8 @@ class Detalle_Compra_MaterialesAdmin(admin.ModelAdmin):
 # Cambio realizado: Registro del modulo Compra de materiales en el sitio, Ln 71
 # Fecha actualizado: 27/08/2014.
 # Cambio realizado: Registro del modulo Detalle de compra de materiales en el sitio, Ln 74
+# Fecha actualizado: 02/10/2014
+# Cambio realizado: Registro del modulo Proveedores con las columnas NIT y Nombre, Ln 116
 admin.site.register(Empresa, EmpresaAdmin)
 admin.site.register(Usuario, UsuariosAdmin)
 admin.site.register(Bodega, BodegasAdmin)
@@ -107,7 +123,7 @@ admin.site.register(TipoDocumento)
 admin.site.register(FormaPago)
 admin.site.register(Empleado)
 admin.site.register(Cliente)
-admin.site.register(Proveedor)
+admin.site.register(Proveedor, ProveedorAdmin)
 admin.site.register(Venta)
 admin.site.register(DetalleVenta)
 

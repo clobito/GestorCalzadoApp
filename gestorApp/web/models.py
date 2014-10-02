@@ -1,22 +1,19 @@
 from django.db import models
 
 # Create your models here.
+#Fecha actualizado 01/10/2014
+#Cambio realizado: Actualizar llave primaria Codigo en el modelo, Ln 94
+class TipoDocumento(models.Model):    	
+	Nombre = models.CharField(max_length=50)
+	Codigo = models.CharField(max_length=5, unique=True)
+	#Codigo = models.CharField(max_length=5, unique=True, primary_key = True)
+	def __unicode__(self):
+		return self.Codigo		
 # Entidades de la capa Ingreso a la aplicacion
 # Fecha creado: 26/08/2014
 # Objeto de la entidad web_empresa
 # Fecha actualizado: 
-# Cambio realizado: Cambio de control texto a Email, Ln 14
-class TipoDocumento(models.Model):
-    Nombre = models.CharField(max_length=50)
-    Codigo = models.CharField(max_length=5, unique=True)
-    def __unicode__(self):
-        return self.Codigo
-
-class FormaPago(models.Model):
-    Nombre = models.CharField(max_length=50)
-    def __unicode__(self):
-        return self.Nombre
-
+# Cambio realizado: Cambio de control texto a Email, Ln 14		
 class Empresa(models.Model):
 	# Atributos
     Nit = models.CharField(max_length=13, primary_key = True)
@@ -33,6 +30,8 @@ class Empresa(models.Model):
 # Fecha cambio: 26/08/2014. Cambio realizado: Colocar campo validador para email, Ln 25
 # Fecha actualizado: 05/09/2014
 # Cambio realizado: Colocar campo Password con * (favor revisar porque no lo hace), Ln 40 (DESAC). Se instancio en el fuente forms.py la clase ClaveForm() y se redefinio la visualizacion del campo denominado Clave, pero no lo renderiza.
+# Fecha actualizado: 01/10/2014
+# Cambio realizado: Actualizacion llave foranea, Ln 37
 
 class Usuario(models.Model):
     TipoDocumento = models.ForeignKey(TipoDocumento)
@@ -95,10 +94,17 @@ class Producto(models.Model):
 	#Conversion_UndVenta_UndCompra=models.ForeignKey(Conversion_UndVenta_UndCompra)
 	# Visualizacion en la grilla
 	def __unicode__(self):
-		return self.Nombre_producto + ' '+ self.Linea
+		return self.Nombre_producto + ' '+ self.Linea	
 
+class FormaPago(models.Model):
+    Nombre = models.CharField(max_length=50)
+    def __unicode__(self):
+        return self.Nombre
+		
 # Objeto de la entidad Empleados
 # Capa/Modulo asociado: Facturacion
+# Fecha actualizado: 02/10/2014
+# Cambio realizado: Visualizar el campo empleado Nombre y cargo, Ln 118
 class Empleado(models.Model):
     TipoDocumento = models.ForeignKey(TipoDocumento)
     Documento = models.CharField(max_length=13, primary_key = True)
@@ -109,7 +115,7 @@ class Empleado(models.Model):
     Cargo = models.CharField(max_length=50, null=True)
     Foto = models.ImageField(upload_to='static/files',null=True,blank=True)
     def __unicode__(self):
-        return self.Nombres + ' ' + self.Apellidos
+        return self.Nombres + ' ' + self.Apellidos + ' | '+self.Cargo
 
 # Objeto de la entidad Clientes
 # Capa/Modulo asociado: Facturacion
@@ -125,16 +131,28 @@ class Cliente(models.Model):
 
 # Objeto de la entidad Proveedor
 # Capa/Modulo asociado: Facturacion
+# Proposito: Crear el objeto proveedor.
+# Fecha creado:
+# Fecha actualizado: 01/10/2014
+# Cambio realizado: Fix del modelo, se quita Posicion que se relaciona con bodega, Ln 140
+# Fecha actualizado: 01/10/2014
+# Cambio realizado: Llave primaria para registrar el documento, de acuerdo al tipo de documento, Ln 139
+# Fecha actualizado: 02/10/2014
+# Cambio realizado: Implementar el retorno de la informacion para NIT y nombre del proveedor, Ln 150
+# Fecha actualizado: 02/10/2014
+# Cambio realizado: Adicionar atributo Identificacion_Documento que permite almacenar el Numero de documento del proveedor, Ln 144
 class Proveedor(models.Model):
-    TipoDocumento = models.ForeignKey(TipoDocumento)
-    Nombre = models.CharField(max_length=200)
-    Telefono_Fijo = models.CharField(max_length=20, null=True)
-    Celular = models.CharField(max_length=20, null=True)
-    Direccion = models.CharField(max_length=100, null=True)
-    Email = models.EmailField(max_length=100, null=True)
-    Posicion = models.ForeignKey(Bodega)
-    def __unicode__(self):
-        return self.Nombre
+	#Nit_proveedor = models.CharField(max_length=13, primary_key = True)	
+	Identificacion_Documento = models.CharField(max_length=20, default=0)
+	Nombre = models.CharField(max_length=200)
+	Telefono_Fijo = models.CharField(max_length=20, null=True)
+	Celular = models.CharField(max_length=20, null=True)
+	Direccion = models.CharField(max_length=100, null=True)
+	Email = models.EmailField(max_length=100, null=True)
+	#Posicion = models.ForeignKey(Bodega)
+	TipoDocumento = models.ForeignKey(TipoDocumento)
+	def __unicode__(self):
+		return self.Identificacion_Documento+' | '+self.Nombre
 
 # Objeto de la entidad Venta
 # Capa/Modulo asociado: Facturacion
@@ -173,16 +191,20 @@ class DetalleVenta(models.Model):
 # Cambio realizado: Adicion al modelo el atributo de cierre de la orden de compra, Ln 179
 # Observaciones: El atributo de la Ln 179, no debe desplegarse en el formulario.
 # Fecha actualizado: 30/09/2014
-# Proposito: Activar campos de las entidades Proveedor y Empleado, Ln 184,185
+# Proposito: Activar campos de las entidades Proveedor y Empleado (NOTA: Correr la sincronizacion a la BD), Ln 199,200.
+# Fecha actualizado: 01/10/2014
+# Proposito: Actualizacion atributo CC_empleado a Documento, Ln 198
+# Fecha actualizado: 02/10/2014
+# Proposito: Asignar el nombre de la llave foranea a los atributos, Ln 199,200
 class Compra_Material(models.Model):
 	# Definicion de Atributos
     No_compra = models.CharField(max_length=15, primary_key = True)
     Fecha = models.DateField()
     Observaciones = models.TextField(null = True, blank=True)
-    OC_cerrada = models.CharField(max_length=2, default=0)
-	# Aparecen desactivados, ya que aun no se han implementado sus clases
-    Nit_proveedor=models.ForeignKey(Proveedor)
-    CC_empleado=models.ForeignKey(Empleado)
+    OC_cerrada = models.CharField(max_length=2, default=0)	
+	# Se activan llaves foraneas correspondiente a proveedor y a empleado por tener el modelo actualizado (01/10/2014), Ln 197-198 #Nit_proveedor=models.ForeignKey(Proveedor)	
+    id = models.ForeignKey(Proveedor, verbose_name='Proveedor')
+    Documento=models.ForeignKey(Empleado, verbose_name='Empleado')
 	# Visualizacion en la grilla
     def __unicode__(self):
 	    #Desactivado, , ya que aun no se han implementado sus clases
