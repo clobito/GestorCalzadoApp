@@ -10,8 +10,11 @@
 # Cambio realizado: Inclusion de la libreria de tiempo, Ln 15. Inclusion de la clase Producto desde el modelo, Ln 12
 # Fecha actualizado: 17/09/2014
 # Cambio realizado: Inclusion del modulo Compra_Material, Ln 14
+# Fecha actualizado: 03/10/2014
+# Cambio realizado: Inclusion de los modulos de facturacion, correspondiente a Empleado y Proveedor, Ln 17
 from django.shortcuts import render, render_to_response
 from web.models import Bodega, Inventario, Producto, Compra_Material
+from web.models import Proveedor, Empleado
 from forms import BodegaForm, CrearCompraForm, CrearDetalleCompraForm
 from django.http import HttpResponseRedirect
 from datetime import datetime
@@ -42,6 +45,10 @@ def inventario(request):
 # Fecha creado: 05/09/2014
 # Fecha actualizado: 17/09/2014
 # Cambio realizado: Devolver objeto a la vista, Ln 52. Almacenar el campo No_compra como string a la BD, Ln 41. FUENTE: http://bytes.com/topic/python/answers/20874-converting-integer-string
+# Fecha actualizado: 02/10/2014 
+# Cambio realizado: Almacenar los campos de las llaves foraneas correspondientes a proveedor y a empleado, Ln 56-58
+# Fecha actualizado: 03/10/2014
+# Cambio realizado: Cargue del proveedor, desde la variable id enviada por POST desde la vista crear_compra.html
 def CrearCompra(request):
 	if request.POST:
 		form = CrearCompraForm(request.POST)
@@ -51,8 +58,14 @@ def CrearCompra(request):
 			#Carga de campos
 			Fecha=request.POST['Fecha']
 			Observaciones=request.POST['Observaciones']
+			id=request.POST['id']
+			Documento=request.POST['Documento']
+			#Instancia de proveedor
+			id=Proveedor.objects.get(id=id)
+			#Instancia de empleado
+			Documento=Empleado.objects.get(Documento=Documento)
 			#Almacenamiento
-			compra= Compra_Material(No_compra=num_compra,Fecha=Fecha,Observaciones=Observaciones)
+			compra= Compra_Material(No_compra=num_compra,Fecha=Fecha,Observaciones=Observaciones,id=id,Documento=Documento)
 			#form.save()
 			compra.save()
 			return HttpResponseRedirect('/web/inventario/crear/detallecompra')

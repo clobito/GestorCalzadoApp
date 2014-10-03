@@ -53,14 +53,20 @@ class Usuario(models.Model):
 # Fecha creado: 26/08/2014 
 # Fecha actualizado: 27/08/2014
 # Cambio realizado: Especificar observaciones como opcional (27/08/2014), Ln 47
+# Fecha actualizado: 03/10/2014 
+# Cambio realizado: Visualizar el campo Bodega como Nombre y posicion, Ln 65
+# Fecha actualizado: 03/10/2014 
+# Cambio realizado: Cambio tipo de dato asociado al Estante de Entero => Varchar de 20 posiciones, Ln 62. 
+# Fecha actualizado: 03/10/2014 
+# Cambio realizado: Especificar el campo asociado a la llave primaria como Codigo de Bodega, Ln 63
 class Bodega(models.Model):
-	No_Posicion = models.CharField(max_length=15, primary_key = True)
-	Estante =  models.IntegerField()
+	No_Posicion = models.CharField(max_length=15, primary_key = True, verbose_name="Codigo Bodega")
+	Estante =  models.CharField(max_length=20, verbose_name="Posicion")
 	Bodega = models.CharField(max_length=30)
 	Observaciones = models.TextField(blank=True)
 	# Visualizacion en la grilla
 	def __unicode__(self):
-		return self.Bodega
+		return self.Bodega + ' | ' + str(self.Estante)
 		
 # Objeto de la entidad Conversion_UndVenta_UndCompra 
 # Capa/Modulo asociado: Facturacion
@@ -81,6 +87,8 @@ class Conversion_UndVenta_UndCompra(models.Model):
 # Cambio realizado: Especificar observaciones como opcional (27/08/2014), Ln 82
 # Fecha actualizado: 15/09/2014
 # Cambio realizado: Colocar atributo Cantidad, segun modelo de datos en archivo Modelo_DER_SENA_15Sep2014_0938.jpg cargado en Trello.com mediante tarea "Integracion de artes para el modulo de inventarios", Ln 91
+# Fecha actualizado: 03/10/2014
+# Cambio realizado: Visualizar la informacion del producto asi: Nombre del producto, Linea con el separador |. Ln 101
 class Producto(models.Model):
 	# Definicion de Atributos
 	Ref_Producto = models.CharField(max_length=20, primary_key = True)
@@ -94,7 +102,7 @@ class Producto(models.Model):
 	#Conversion_UndVenta_UndCompra=models.ForeignKey(Conversion_UndVenta_UndCompra)
 	# Visualizacion en la grilla
 	def __unicode__(self):
-		return self.Nombre_producto + ' '+ self.Linea	
+		return self.Nombre_producto + ' | '+ self.Linea	
 
 class FormaPago(models.Model):
     Nombre = models.CharField(max_length=50)
@@ -222,6 +230,8 @@ class Compra_Material(models.Model):
 # Cambio realizado: Colocar columna producto, Ln 205
 # Fecha actualizado: 22/09/2014
 # Cambio realizado: Redefinir combo para la variable talla, Ln 206-215
+# Fecha actualizado: 03/10/2014
+# Cambio realizado: Colocar labels a los campos con llave foranea, Ln 245-247
 class Detalle_Compra_Material(models.Model):
 	# Definicion de Atributos
 	id_Detalle = models.AutoField(primary_key=True)
@@ -240,9 +250,9 @@ class Detalle_Compra_Material(models.Model):
 	# Campo opcional
 	Observacion = models.TextField(null = True, blank=True)
 	# Llaves Foraneas
-	No_compra = models.ForeignKey(Compra_Material)
-	No_Posicion = models.ForeignKey(Bodega)
-	Ref_Producto = models.ForeignKey(Producto)
+	No_compra = models.ForeignKey(Compra_Material, verbose_name='Numero de compra')
+	No_Posicion = models.ForeignKey(Bodega, verbose_name='Bodega')
+	Ref_Producto = models.ForeignKey(Producto, verbose_name='Producto')
 	# Visualizacion en la grilla
 	def __unicode__(self):
 		return unicode(self.Cantidad) + unicode(self.Ref_Producto) + ' ' + self.Talla + ' ' + self.Color + ' ' + self.Observacion
