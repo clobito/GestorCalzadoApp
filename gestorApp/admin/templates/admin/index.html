@@ -10,8 +10,6 @@ Fecha actualizado: 29/09/2014
 Cambio realizado: Ajuste del desarrollo gráfico del Front end. Personalización del titulo, Ln 41,43  --> 
 
 
-
-
 {% extends "admin/base_site.html" %}
 {% load i18n admin_static %}
 
@@ -70,6 +68,16 @@ Cambio realizado: Ajuste del desarrollo gráfico del Front end. Personalización
         </div>
         </div>
     {% endfor %}
+	{% else %}
+	<!-- Implementar acá la pantalla de Bienvenida -->
+   <div> <p class="h3">Bienvenido/a<p>
+   <p class="text-justify" style="font-size:14px">El software para la gestión de la producción es un aplicativo informático que proporcionará a su empresa las herramientas para una adecuada planeación y control de la producción, disminuyendo los costos y maximizando su potencial en la industria de la moda.</p>
+   <p class="text-justify" style="font-size:14px">Para comenzar, haga clic en alguno de los elementos del menú superior. Si desea cambiar la contaseña, puede hacerlo en esta misma ventana.</p>
+   <p class="text-justify" style="font-size:14px">Para salir, cierre sesión en la parte inferior de la pantalla</p>
+   <p class="text-justify" style="font-size:10px">&copy;SENA 2014, todos los derechos reservados. Se prohibe su copia, venta y/o distribución sin autorización.</p>
+   </div>
+    
+    
 {% endif %}
 <!-- Vinculos -->
 
